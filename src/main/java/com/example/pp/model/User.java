@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Data
 @Entity
 @Component
-@Table(name = "person")
-public class Person {
+@Table(name = "users")
+public class User {
 
     @ToString.Include
     @Id
@@ -21,7 +21,7 @@ public class Person {
     @ToString.Include
     @Column(name = "lastname", length = 50)
     private String lastname;
-    public Person(){
+    public User(){
 
     }
 
@@ -49,7 +49,7 @@ public class Person {
         this.lastname = lastname;
     }
 
-    public Person(long id, String name, String lastname) {
+    public User(long id, String name, String lastname) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;

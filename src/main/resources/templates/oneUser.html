@@ -12,17 +12,17 @@
         <th>Last Name</th>
     </tr>
     <tbody>
-    <tr th:each="person : ${person}">
-        <td th:utext="${person.getId()}"></td>
-        <td th:utext="${person.getName()}"></td>
-        <td th:utext="${person.getLastname()}"></td>
+    <tr th:each="user : ${user}">
+        <td th:utext="${user.getId()}"></td>
+        <td th:utext="${user.getName()}"></td>
+        <td th:utext="${user.getLastname()}"></td>
     </tr>
     </tbody>
 </table>
-<form th:action="@{/views/{id}(id=${person.getId()})}" th:object="${user}">
+<form th:action="@{/views/{id}(id=${user.getId()})}" th:object="${user}">
     <button type="submit">Edit</button>
 </form>
-<form th:method="DELETE" th:action="@{views/{id}(id=${person.getId()})}" th:object="${user}">
+<form th:method="DELETE" th:action="@{views/{id}(id=${user.getId()})}" th:object="${user}">
     <button type="submit">Delete</button>
 </form>
 </body>

@@ -1,7 +1,8 @@
 package com.example.pp.control;
 
-import com.example.pp.model.Person;
-import com.example.pp.service.PersonService;
+import com.example.pp.model.User;
+import com.example.pp.service.UserService;
+import com.example.pp.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,45 +14,45 @@ import java.util.List;
 @RequestMapping("/")
 public class Controller {
      @Autowired
-    private PersonService personService;
-    public Controller(PersonService personService) {
-        this.personService = personService;
+    private UserService userService;
+    public Controller(UserService userService) {
+        this.userService = userService;
     }
 
 
     @GetMapping("/allUsers")
     public String allUsers(Model model){
-        List<Person> users = (List<Person>) personService.allUsers();
-        model.addAttribute("person", users);
-        // model.addAttribute("person",personDAO.allUsers());
+        List<User> users = (List<User>) userService.allUsers();
+        model.addAttribute("user", users);
+
         return "allUsers";
     }
 
     @GetMapping("/new")
     public String newUser(Model model){
-        model.addAttribute("person",new Person());
+        model.addAttribute("user",new User());
         return "new";
     }
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person){
-        personService.save(person);
+    public String create(@ModelAttribute("user") User user){
+        userService.save(user);
         return "redirect:/allUsers";
     }
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") long id, Model model){
-        Person person = personService.oneUser(id);
-        model.addAttribute("person", person);
+        User user = userService.oneUser(id);
+        model.addAttribute("user", user);
         return "edit";
     }
 
     @PostMapping("/edit")
-    public String updateUser(Person person){
-        personService.save(person);
+    public String updateUser(User user){
+        userService.save(user);
         return "redirect:/allUsers";
     }
     @GetMapping ("/{id}")
     public String delete(@PathVariable("id") long id){
-        personService.delete(id);
+        userService.delete(id);
         return "redirect:/allUsers";
     }
 }
