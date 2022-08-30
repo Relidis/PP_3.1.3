@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional(readOnly = true)
     public boolean save(User user){
-        User userFromDB = userRepository.findByName(user.getName());
+        User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
             return false;

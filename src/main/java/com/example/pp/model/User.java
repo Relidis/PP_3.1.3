@@ -18,12 +18,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ToString.Include
-    @Column(name = "name", length = 50)
-    private String name;
+    @Column(name = "username", length = 50)
+    private String username;
 
-    @ToString.Include
-    @Column(name = "lastname", length = 50)
-    private String lastname;
     @ToString.Include
     @Column(name = "password", length = 50)
     private String password;
@@ -54,21 +51,14 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     public String getPassword() {
         return password;
@@ -84,10 +74,9 @@ public class User {
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
-    public User(long id, String name, String lastname, String password) {
+    public User(long id, String username, String password) {
         this.id = id;
-        this.name = name;
-        this.lastname = lastname;
+        this.username = username;
         this.password = password;
     }
 }
