@@ -28,15 +28,17 @@ public class Controller {
         return "allUsers";
     }
 
-    @GetMapping("/new")
+  /*  @GetMapping("/new")
     public String newUser(Model model){
         model.addAttribute("user",new User());
         return "new";
     }
+
+   */
     @PostMapping()
     public String create(@ModelAttribute("user") User user){
         userService.save(user);
-        return "redirect:/allUsers";
+        return "redirect:/admin";
     }
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") long id, Model model){
@@ -48,11 +50,11 @@ public class Controller {
     @PostMapping("/edit")
     public String updateUser(User user){
         userService.save(user);
-        return "redirect:/allUsers";
+        return "redirect:/admin";
     }
     @GetMapping ("/{id}")
     public String delete(@PathVariable("id") long id){
         userService.delete(id);
-        return "redirect:/allUsers";
+        return "redirect:/admin";
     }
 }
