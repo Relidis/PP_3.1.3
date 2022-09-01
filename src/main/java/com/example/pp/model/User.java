@@ -2,16 +2,19 @@ package com.example.pp.model;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Data
 @Entity
 @Component
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @ToString.Include
     @Id
@@ -22,12 +25,12 @@ public class User {
     private String username;
 
     @ToString.Include
-    @Column(name = "password", length = 50)
+    @Column(name = "password", length = 100)
     private String password;
     @ToString.Include
     @Column(name = "roles", length = 50)
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
     @Transient
     private String passwordConfirm;
@@ -55,10 +58,35 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
 
     public String getPassword() {
         return password;

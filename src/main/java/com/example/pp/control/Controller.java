@@ -2,7 +2,6 @@ package com.example.pp.control;
 
 import com.example.pp.model.User;
 import com.example.pp.service.UserService;
-import com.example.pp.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class Controller {
     }
 
 
-    @GetMapping("/allUsers")
+    @GetMapping("/admin/allUsers")
     public String allUsers(Model model){
         List<User> users = (List<User>) userService.allUsers();
         model.addAttribute("user", users);
@@ -40,19 +39,19 @@ public class Controller {
         userService.save(user);
         return "redirect:/admin";
     }
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String edit(@PathVariable("id") long id, Model model){
         User user = userService.oneUser(id);
         model.addAttribute("user", user);
         return "edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/admin/edit")
     public String updateUser(User user){
         userService.save(user);
         return "redirect:/admin";
     }
-    @GetMapping ("/{id}")
+    @GetMapping ("/admin/{id}")
     public String delete(@PathVariable("id") long id){
         userService.delete(id);
         return "redirect:/admin";
