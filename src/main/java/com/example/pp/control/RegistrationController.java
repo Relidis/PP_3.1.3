@@ -1,7 +1,7 @@
 package com.example.pp.control;
 
 import com.example.pp.model.User;
-import com.example.pp.service.UserService;
+import com.example.pp.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +14,8 @@ public class RegistrationController {
 
 
     @Autowired
-private UserService userService;
-    public RegistrationController(UserService userService) {
+private UserServiceImpl userService;
+    public RegistrationController(UserServiceImpl userService) {
         this.userService = userService;
     }
     @GetMapping("/registration")
@@ -32,10 +32,12 @@ private UserService userService;
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
-        if (!userService.save(userForm)){
+   /*     if (!userService.addUser(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
+
+    */
 
         return "redirect:/";
     }

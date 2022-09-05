@@ -1,12 +1,10 @@
-package com.example.pp.repository;
+package com.example.pp.service;
 
 import com.example.pp.model.Role;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-
-public interface RoleRepository {
+public interface RoleService {
     Role getRoleByName(String name);
 
     Role getRoleById(Long id);
@@ -14,4 +12,5 @@ public interface RoleRepository {
     List<Role> allRoles();
 
     Role getDefaultRole();
+
 }
