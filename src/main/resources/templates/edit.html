@@ -2,19 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update user</title>
+    <title>Обновление пользователя</title>
 </head>
 <body>
 <h1>Update user</h1>
 <form th:method="POST" th:action="@{/edit}" th:object="${user}">
     <fieldset>
-        <label for="name">Enter name: </label>
-        <input type="text" th:field="*{username}" id="name"/>
-        <label for="lastname">Enter Lastname: </label>
-        <input type="text" th:field="*{lastname}" id="lastname"/>
+        <label for="name">ВВедите новое имя: </label>
+        <input type="text" th:field="*{user.username}" id="name"/>
+        <label for="password">Введите новый пароль: </label>
+        <input type="text" th:field="*{user.password}" id="password"/>
         <br/>
     </fieldset>
-    <input type="submit" value="Update!"/>
+    <input type="submit" value="Обновить!"/>
 </form>
 </body>
 </html>

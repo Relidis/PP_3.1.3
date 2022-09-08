@@ -8,14 +8,13 @@
 <table border="1">
     <tr>
         <th>Id</th>
-        <th>Name</th>
-        <th>Last Name</th>
+        <th>UserName</th>
+
     </tr>
     <tbody>
     <tr th:each="user : ${user}">
         <td th:utext="${user.getId()}"></td>
         <td th:utext="${user.getName()}"></td>
-        <td th:utext="${user.getLastname()}"></td>
     </tr>
     </tbody>
 </table>
@@ -25,5 +24,7 @@
 <form th:method="DELETE" th:action="@{views/{id}(id=${user.getId()})}" th:object="${user}">
     <button type="submit">Delete</button>
 </form>
+</form:form>
+<a href="/">Главная</a>
 </body>
 </html>

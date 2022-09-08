@@ -49,6 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
    */
+
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -78,8 +80,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
     }
 
-    // аутентификация inMemory
-  /*  @Bean
+
+
+  @Bean
    public JdbcUserDetailsManager users(DataSource dataSource) {
         UserDetails user = User.builder()
                         .username("user")
@@ -95,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return users;
     }
 
-  */
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

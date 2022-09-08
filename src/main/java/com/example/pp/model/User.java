@@ -20,20 +20,19 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ToString.Include
-    @Column(name = "username", length = 50)
     private String username;
-
-    @ToString.Include
-    @Column(name = "password", length = 100)
     private String password;
-    @ToString.Include
-    @Column(name = "roles", length = 50)
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<Role> roles;
     @Transient
     private String passwordConfirm;
+
+
     public User(){
 
     }
@@ -95,16 +94,20 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getPasswordConfirm() {
+   public String getPasswordConfirm() {
         return passwordConfirm;
     }
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
-    public User(long id, String username, String password) {
+
+
+
+    public User(long id, String username, String password, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 }

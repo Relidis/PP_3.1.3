@@ -15,12 +15,12 @@ import java.util.Set;
 
 
 @org.springframework.stereotype.Controller
-@RequestMapping("/")
-public class Controller {
+@RequestMapping("/admin/allUsers")
+public class AdminController {
      @Autowired
     private UserServiceImpl userService;
     private RoleServiceImpl roleService;
-    public Controller(UserServiceImpl userService) {
+    public AdminController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -32,18 +32,17 @@ public class Controller {
 
         return "allUsers";
     }
-
-    @GetMapping(value = "admin/new")
+    @GetMapping(value = "admin/add")
     public String addUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "new";
+        return "admin/add";
     }
 
     @PostMapping(value = "admin/add")
     public String postAddUser(@ModelAttribute("user") User user,
-                              @RequestParam(required = false) String roleAdmin){
-        Set<Role> roles =new HashSet<>();
+                              @RequestParam(required=false) String roleAdmin) {
+        Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRoleByName("ROLE_USER"));
         if (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN")) {
             roles.add(roleService.getRoleByName("ROLE_ADMIN"));
@@ -51,8 +50,9 @@ public class Controller {
         user.setRoles(roles);
         userService.addUser(user);
 
-        return "redirect:/admin";
+        return "redirect:/admin/allUsers";
     }
+
     @GetMapping(value = "admin/edit/{id}")
     public String editUser(ModelMap model, @PathVariable("id") Long id) {
         User user = userService.getUserById(id);
@@ -63,7 +63,7 @@ public class Controller {
             }
         }
         model.addAttribute("user", user);
-        return "edit";
+        return "admin/edit";
     }
     @PostMapping(value = "admin/edit")
     public String postEditUser(@ModelAttribute("user") User user,
@@ -75,7 +75,7 @@ public class Controller {
         }
         user.setRoles(roles);
         userService.editUser(user);
-        return "redirect:/admin";
+        return "redirect:/admin/allUsers";
     }
 
     @GetMapping ("/admin/{id}")

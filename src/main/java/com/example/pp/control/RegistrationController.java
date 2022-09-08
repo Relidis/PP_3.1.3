@@ -26,20 +26,17 @@ private UserServiceImpl userService;
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") User userForm, Model model) {
+    public String addUser(@ModelAttribute("userForm") User userForm) {
 
-        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+  /*      if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
-   /*     if (!userService.addUser(userForm)){
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "registration";
-        }
 
-    */
-
+   */
         return "redirect:/";
     }
+
+
 }
 

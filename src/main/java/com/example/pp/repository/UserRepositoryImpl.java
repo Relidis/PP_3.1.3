@@ -53,8 +53,13 @@ public class UserRepositoryImpl implements UserRepository {
                 .createQuery("select u from User u", User.class)
                 .getResultList();
     }
-
     @Override
+    public User getUserByUsername(String username) {
+        return entityManager.createQuery("SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
+ /*   @Override
     public  UserDetails getUserByUsername(String username) {
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT u FROM User u JOIN FETCH u.roles", User.class);
@@ -62,4 +67,6 @@ public class UserRepositoryImpl implements UserRepository {
         return (UserDetails) resultList;
 
     }
+
+  */
 }
