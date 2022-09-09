@@ -15,22 +15,19 @@ public class UserRepositoryImpl implements UserRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected EntityManager getEntityManager() {
-        return this.entityManager;
-    }
 
     @Override
     public void addUser(User user) {
-        getEntityManager().persist(user);
+        entityManager.persist(user);
     }
 
     @Override
     public void deleteUser(Long id) {
 
         try {
-            User user = getEntityManager().find(User.class, id);
+            User user = entityManager.find(User.class, id);
             if (user != null) {
-                getEntityManager().remove(user);
+                entityManager.remove(user);
             }
         } catch (NullPointerException e) {
             System.out.println("User с указанным вами id не существует!");
@@ -39,18 +36,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void editUser(User user) {
-        getEntityManager().merge(user);
+        entityManager.merge(user);
     }
 
     @Override
     public User getUserById(Long id) {
-        return getEntityManager().find(User.class, id);
+        return entityManager.find(User.class, id);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return getEntityManager()
-                .createQuery("select u from User u", User.class)
+        return entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
     }
     @Override
@@ -59,14 +55,5 @@ public class UserRepositoryImpl implements UserRepository {
                 .setParameter("username", username)
                 .getSingleResult();
     }
- /*   @Override
-    public  UserDetails getUserByUsername(String username) {
-        TypedQuery<User> query = entityManager.createQuery(
-                "SELECT u FROM User u JOIN FETCH u.roles", User.class);
-        List<User> resultList = query.getResultList();
-        return (UserDetails) resultList;
 
-    }
-
-  */
 }

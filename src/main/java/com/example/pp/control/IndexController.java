@@ -1,5 +1,5 @@
 
-
+/*
 import com.example.pp.model.Role;
 import com.example.pp.model.User;
 import com.example.pp.service.UserService;
@@ -34,12 +34,14 @@ public class IndexController {
             Set<Role> userRole = new HashSet<>();
             adminRole.add(admin);
             userRole.add(user);
-            userService.addUser(new User(1, "Misha", bCryptPasswordEncoder.encode("admin"), adminRole));
-            userService.addUser(new User(2,  "Dima", bCryptPasswordEncoder.encode("user"), userRole));
-            userService.addUser(new User(3, "Kostya", bCryptPasswordEncoder.encode("dimab"), userRole));
-            userService.addUser(new User(4, "vasyap", bCryptPasswordEncoder.encode("vasyap"), userRole));
-            userService.addUser(new User(5, "vasyap", bCryptPasswordEncoder.encode("kostyag"), userRole));
+            userService.addUser(new User(1L, "Misha", bCryptPasswordEncoder.encode("admin"), adminRole));
+            userService.addUser(new User(2L,  "Dima", bCryptPasswordEncoder.encode("user"), userRole));
+            userService.addUser(new User(3L, "Kostya", bCryptPasswordEncoder.encode("dimab"), userRole));
+            userService.addUser(new User(4L, "vasyap", bCryptPasswordEncoder.encode("vasyap"), userRole));
+            userService.addUser(new User(5L, "vasyap", bCryptPasswordEncoder.encode("kostyag"), userRole));
         }
         return "index";
     }
 }
+
+ */

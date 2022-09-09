@@ -12,16 +12,12 @@ public class RoleRepositoryImpl implements RoleRepository{
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected EntityManager getEntityManager() {
-        return this.entityManager;
-    }
 
     @Override
     public Role getRoleByName(String name) {
         Role role = null;
         try {
-            role = getEntityManager()
-                    .createQuery("SELECT r FROM Role r WHERE r.name=:name", Role.class)
+            role = entityManager.createQuery("SELECT r FROM Role r WHERE r.name=:name", Role.class)
                     .setParameter("name", name)
                     .getSingleResult();
         } catch (Exception e) {
@@ -32,13 +28,12 @@ public class RoleRepositoryImpl implements RoleRepository{
 
     @Override
     public Role getRoleById(Long id) {
-        return getEntityManager().find(Role.class, id);
+        return entityManager.find(Role.class, id);
     }
 
     @Override
     public List<Role> allRoles() {
-        return getEntityManager()
-                .createQuery("select r from Role r", Role.class)
+        return entityManager.createQuery("select r from Role r", Role.class)
                 .getResultList();
     }
 

@@ -1,5 +1,6 @@
 package com.example.pp.configs;
 
+import com.example.pp.service.UserService;
 import com.example.pp.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +21,10 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
 
-    public WebSecurityConfig(SuccessUserHandler successUserHandler, @Autowired UserServiceImpl userService) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, @Autowired UserService userService) {
         this.successUserHandler = successUserHandler;
         this.userService = userService;
     }
