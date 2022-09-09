@@ -1,16 +1,20 @@
 package com.example.pp.service;
 
 ;
+import com.example.pp.model.Role;
 import com.example.pp.model.User;
 
 import com.example.pp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -19,22 +23,19 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+
     }
-    @Autowired
-    public User passwordEncoder(User User) {
-        User.setPassword(passwordEncoder.encode(User.getPassword()));
-        return User;
+    public User passwordEncoder(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return user;
     }
-    @Transactional(readOnly=true)
-    @Autowired
-    public void setUserRepo(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+
+
     @Transactional(readOnly=true)
     @Override
     public void addUser(User user) {

@@ -3,6 +3,8 @@ package com.example.pp;
 import com.example.pp.model.Role;
 import com.example.pp.model.User;
 import com.example.pp.service.UserService;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,14 +16,18 @@ import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
-public class Application {
+public class Application implements ApplicationRunner {
+    public Application(UserService userService) {
+        this.userService = userService;
+    }
 
+    private UserService userService;
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-/*
-    @Bean
-    public CommandLineRunner CommandLineRunnerBean() {
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
         List<User> users = userService.getAllUsers();
 
         if (users.isEmpty()) {
@@ -37,9 +43,7 @@ public class Application {
             userService.addUser(new User(3L, "Kostya", bCryptPasswordEncoder.encode("dimab"), userRole));
             userService.addUser(new User(4L, "vasyap", bCryptPasswordEncoder.encode("vasyap"), userRole));
             userService.addUser(new User(5L, "vasyap", bCryptPasswordEncoder.encode("kostyag"), userRole));
-            return User;
+
         }
     }
-
- */
 }

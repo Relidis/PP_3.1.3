@@ -5,6 +5,8 @@ import com.example.pp.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
 
 
-    public WebSecurityConfig(SuccessUserHandler successUserHandler, @Autowired UserService userService) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, @Lazy UserService userService) {
         this.successUserHandler = successUserHandler;
         this.userService = userService;
     }
@@ -32,25 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-  /*  @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/index").permitAll()
-                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().successHandler(successUserHandler)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .permitAll();
-    }
-
-   */
-
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -82,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
+/*
   @Bean
    public JdbcUserDetailsManager users(DataSource dataSource) {
         UserDetails user = User.builder()
@@ -100,6 +83,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+
+ */
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
