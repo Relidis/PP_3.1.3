@@ -2,6 +2,7 @@ package com.example.pp.service;
 
 import com.example.pp.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 

@@ -13,29 +13,15 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService{
 
     private RoleRepository roleRepository;
-    @Transactional(readOnly=true)
-    @Autowired
-    public void setRoleRepo(RoleRepository roleRepository) {
+
+    public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
-    @Transactional(readOnly=true)
-    @Override
-    public Role getRoleByName(String name) {
-        return roleRepository.getRoleByName(name);
-    }
+
     @Transactional(readOnly=true)
     @Override
     public Role getRoleById(Long id) {
         return roleRepository.getRoleById(id);
     }
-    @Transactional(readOnly=true)
-    @Override
-    public List<Role> allRoles() {
-        return roleRepository.allRoles();
-    }
-    @Transactional(readOnly=true)
-    @Override
-    public Role getDefaultRole() {
-        return roleRepository.getDefaultRole();
-    }
+
 }

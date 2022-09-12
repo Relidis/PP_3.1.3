@@ -23,23 +23,18 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
 
-    }
-    public User passwordEncoder(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return user;
     }
 
 
     @Transactional(readOnly=true)
     @Override
     public void addUser(User user) {
-        userRepository.addUser(passwordEncoder(user));
+        userRepository.addUser(user);
     }
     @Transactional(readOnly=true)
     @Override
@@ -49,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly=true)
     @Override
     public void editUser(User user) {
-        userRepository.editUser(passwordEncoder(user));
+        userRepository.editUser(user);
     }
     @Transactional(readOnly=true)
     @Override

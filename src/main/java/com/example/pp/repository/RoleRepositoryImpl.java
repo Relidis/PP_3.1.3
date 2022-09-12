@@ -12,18 +12,8 @@ public class RoleRepositoryImpl implements RoleRepository{
     @PersistenceContext
     private EntityManager entityManager;
 
-
-    @Override
-    public Role getRoleByName(String name) {
-        Role role = null;
-        try {
-            role = entityManager.createQuery("SELECT r FROM Role r WHERE r.name=:name", Role.class)
-                    .setParameter("name", name)
-                    .getSingleResult();
-        } catch (Exception e) {
-            System.out.println("Роли с таким именем не существует!");
-        }
-        return role;
+    public RoleRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -31,16 +21,6 @@ public class RoleRepositoryImpl implements RoleRepository{
         return entityManager.find(Role.class, id);
     }
 
-    @Override
-    public List<Role> allRoles() {
-        return entityManager.createQuery("select r from Role r", Role.class)
-                .getResultList();
-    }
-
-    @Override
-    public Role getDefaultRole() {
-        return getRoleByName("ROLE_USER");
-    }
 }
 
 

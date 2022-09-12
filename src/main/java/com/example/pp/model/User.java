@@ -13,9 +13,6 @@ import java.util.Set;
 
 
 @Entity
-@Component
-@Getter
-@Setter
 @Table(name = "users")
 public class User implements UserDetails {
 
