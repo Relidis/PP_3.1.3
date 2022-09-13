@@ -31,17 +31,17 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Transactional(readOnly=true)
+
     @Override
     public void addUser(User user) {
         userRepository.addUser(user);
     }
-    @Transactional(readOnly=true)
+
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteUser(id);
     }
-    @Transactional(readOnly=true)
+
     @Override
     public void editUser(User user) {
         userRepository.editUser(user);

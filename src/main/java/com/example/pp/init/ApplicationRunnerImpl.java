@@ -5,6 +5,7 @@ import com.example.pp.model.User;
 import com.example.pp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class ApplicationRunnerImpl implements ApplicationRunner{
+public class ApplicationRunnerImpl implements ApplicationRunner {
 
 
     private UserService userService;

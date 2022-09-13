@@ -86,7 +86,7 @@ public class AdminController {
     @PostMapping(value = "admin/edit")
     public String userUpdate(@ModelAttribute("user") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.addUser(user);
+        userService.editUser(user);
         return "redirect:/admin";
     }
 
