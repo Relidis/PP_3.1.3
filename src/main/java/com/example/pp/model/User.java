@@ -1,10 +1,7 @@
 package com.example.pp.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -93,8 +90,7 @@ public class User implements UserDetails {
     }
 
 
-    public User(Long id, String username, String password, Set<Role> roles) {
-        this.id = id;
+    public User(String username, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;

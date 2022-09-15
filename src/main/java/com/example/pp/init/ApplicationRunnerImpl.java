@@ -3,12 +3,10 @@ package com.example.pp.init;
 import com.example.pp.model.Role;
 import com.example.pp.model.User;
 import com.example.pp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -37,11 +35,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
             Set<Role> userRole = new HashSet<>();
             adminRole.add(admin);
             userRole.add(user);
-            userService.addUser(new User(1L, "Misha", passwordEncoder.encode("admin"), adminRole));
-            userService.addUser(new User(2L,  "Dima", passwordEncoder.encode("user"), userRole));
-            userService.addUser(new User(3L, "Kostya", passwordEncoder.encode("dimab"), userRole));
-            userService.addUser(new User(4L, "vasyap", passwordEncoder.encode("vasyap"), userRole));
-            userService.addUser(new User(5L, "vasyap", passwordEncoder.encode("kostyag"), userRole));
+            userService.addUser(new User( "Misha", passwordEncoder.encode("admin"), adminRole));
+            userService.addUser(new User( "Dima", passwordEncoder.encode("user"), userRole));
+            userService.addUser(new User("Kostya", passwordEncoder.encode("dimab"), userRole));
+            userService.addUser(new User("vasyap", passwordEncoder.encode("vasyap"), userRole));
+            userService.addUser(new User("vasyap", passwordEncoder.encode("kostyag"), userRole));
 
         }
     }
