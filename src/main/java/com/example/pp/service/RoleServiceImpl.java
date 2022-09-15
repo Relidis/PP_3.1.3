@@ -1,6 +1,7 @@
 package com.example.pp.service;
 
 import com.example.pp.model.Role;
+import com.example.pp.model.User;
 import com.example.pp.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,23 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService{
 
     private RoleRepository roleRepository;
-
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
+    @Override
+    public void addRole(Role role) {
+        roleRepository.addRole(role);
+    }
+
 
     @Transactional(readOnly=true)
     @Override
     public Role getRoleById(Long id) {
         return roleRepository.getRoleById(id);
+    }
+    @Override
+    public Role getRoleByName(String name) {
+        return roleRepository.getRoleByName(name);
     }
 
 }

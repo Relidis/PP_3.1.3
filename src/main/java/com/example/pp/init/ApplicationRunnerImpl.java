@@ -2,6 +2,7 @@ package com.example.pp.init;
 
 import com.example.pp.model.Role;
 import com.example.pp.model.User;
+import com.example.pp.service.RoleService;
 import com.example.pp.service.UserService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,9 +20,12 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     private UserService userService;
     private BCryptPasswordEncoder passwordEncoder;
 
-    public ApplicationRunnerImpl(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+    private RoleService roleService;
+
+    public ApplicationRunnerImpl(UserService userService, BCryptPasswordEncoder passwordEncoder, RoleService roleService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
@@ -29,15 +33,17 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         List<User> users = userService.getAllUsers();
 
         if (users.isEmpty()) {
-            Role admin = new Role("ROLE_ADMIN");
-            Role user = new Role("ROLE_USER");
+            roleService.addRole(new Role("ROLE_ADMIN"));
+            roleService.addRole(new Role("ROLE_USER"));
+            Role admin = roleService.getRoleById(1L);
+            Role user = roleService.getRoleById(2L);
             Set<Role> adminRole = new HashSet<>();
             Set<Role> userRole = new HashSet<>();
             adminRole.add(admin);
             userRole.add(user);
-            userService.addUser(new User( "Misha", passwordEncoder.encode("admin"), adminRole));
-            userService.addUser(new User( "Dima", passwordEncoder.encode("user"), userRole));
-            userService.addUser(new User("Kostya", passwordEncoder.encode("dimab"), userRole));
+            userService.addUser(new User( "Misha", passwordEncoder.encode("admin"), adminRole ));
+            userService.addUser(new User( "Dima", passwordEncoder.encode("user"), userRole ));
+            userService.addUser(new User("Kostya", passwordEncoder.encode("dimab"),  userRole));
             userService.addUser(new User("vasyap", passwordEncoder.encode("vasyap"), userRole));
             userService.addUser(new User("vasyap", passwordEncoder.encode("kostyag"), userRole));
 

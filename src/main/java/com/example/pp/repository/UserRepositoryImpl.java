@@ -16,15 +16,11 @@ public class UserRepositoryImpl implements UserRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public UserRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-    @Transactional(readOnly=true)
     @Override
     public void addUser(User user) {
         entityManager.persist(user);
     }
-    @Transactional(readOnly=true)
+
     @Override
     public void deleteUser(Long id) {
 
@@ -37,23 +33,23 @@ public class UserRepositoryImpl implements UserRepository {
             System.out.println("User с указанным вами id не существует!");
         }
     }
-    @Transactional(readOnly=true)
+
     @Override
     public void editUser(User user) {
         entityManager.merge(user);
     }
-    @Transactional(readOnly=true)
+
     @Override
     public User getUserById(Long id) {
         return entityManager.find(User.class, id);
     }
-    @Transactional(readOnly=true)
+
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
     }
-    @Transactional(readOnly=true)
+
     @Override
     public User getUserByUsername(String username) {
         return entityManager.createQuery("SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username", User.class)

@@ -36,8 +36,8 @@ public class AdminController {
 
     @GetMapping("/admin/allUsers")
     public String allUsers(Model model){
-        List<User> users = (List<User>) userService.getAllUsers();
-        model.addAttribute("user", users);
+        List<User> user = userService.getAllUsers();
+        model.addAttribute("user", user);
 
         return "allUsers";
     }
@@ -54,29 +54,13 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-/*
-    @PostMapping(value = "admin/add")
-    public String postAddUser(@ModelAttribute("user") User user,
-                              @RequestParam(required=false) String roleAdmin) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleById(2L));
-        if (roleAdmin != null && roleAdmin.equals(1L)) {
-            roles.add(roleService.getRoleById(2L));
-        }
-        user.setRoles(roles);
-        userService.addUser(user);
-
-        return "redirect:/admin/allUsers";
-    }
-
- */
-
+//Проверить кто такой roleAdmin
     @GetMapping(value = "admin/edit/{id}")
     public String editUser(ModelMap model, @PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         Set<Role> roles = user.getRoles();
         for (Role role: roles) {
-            if (role.equals(roleService.getRoleById(1L))) {
+            if (role.equals(roleService.getRoleByName("ROLE_ADMIN"))) {
                 model.addAttribute("roleAdmin", true);
             }
         }
@@ -93,7 +77,7 @@ public class AdminController {
 
 
     @GetMapping ("/admin/{id}")
-    public String delete(@PathVariable("id") long id){
+    public String delete(@PathVariable("id") Long id){
         userService.deleteUser(id);
         return "redirect:/admin";
     }

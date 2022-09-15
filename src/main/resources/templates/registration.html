@@ -6,17 +6,17 @@
 </head>
 <body>
 <div>
-  <form th:method="POST" th:action="@{/}" th:object="${userForm}">
+  <form th:method="POST" th:action="@{/}" th:object="${user}">
     <h2>Регистрация</h2>
       <fieldset>
     <div>
       <label for="username">Логин</label>
-      <input type="text" th:field="${userForm.username}" id="username">
+      <input type="text" th:field="${user.username}" id="username">
       <br/>
     </div>
     <div>
       <label for="password">Пароль</label>
-      <input type="text" th:field="${userForm.password}" id="password">
+      <input type="text" th:field="${user.password}" id="password">
       <br/>
       </fieldset>
     <button type="submit">Зарегистрироваться</button>

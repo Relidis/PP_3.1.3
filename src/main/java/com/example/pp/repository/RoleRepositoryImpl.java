@@ -12,14 +12,17 @@ import java.util.List;
 public class RoleRepositoryImpl implements RoleRepository{
     @PersistenceContext
     private EntityManager entityManager;
-
-    public RoleRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    @Override
+    public void addRole(Role role) {
+        entityManager.persist(role);
     }
-    @Transactional(readOnly=true)
     @Override
     public Role getRoleById(Long id) {
         return entityManager.find(Role.class, id);
+    }
+    @Override
+    public Role getRoleByName(String name) {
+        return entityManager.find(Role.class, name);
     }
 
 }
