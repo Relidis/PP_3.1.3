@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
@@ -39,12 +40,12 @@
         <td th:utext="${user.getUsername()}"></td>
         <td th:utext="${user.getPassword()}"></td>
         <td>
-            <form  th:action="@{/edit/{id}(id=${user.getId()})}" th:object="${user}">
+            <form  th:action="@{admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
                 <button type="submit">Обновить</button>
             </form>
         </td>
         <td>
-            <form  th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
+            <form  th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
                 <button type="submit">Удалить</button>
             </form>
         </td>
@@ -52,7 +53,9 @@
     </tbody>
 </table>
 <br>
-<button><a href="registration.html">Создать нового пользователя!</a></button>
+<button><a href="/admin/add">Создать нового пользователя!</a></button>
 <br>
+</form:form>
+<a href="/">Главная</a>
 </body>
 </html>
