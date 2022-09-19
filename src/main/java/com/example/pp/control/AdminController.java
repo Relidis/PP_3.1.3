@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -46,6 +48,11 @@ public class AdminController {
     @PostMapping(value = "add")
     public String createUser(@ModelAttribute("user") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+ /*       Set<Role> roles = new HashSet<>();
+        roles.add(roleService.getRoleByName("ROLE_USER"));
+        roles.add(roleService.getRoleByName("ROLE_ADMIN"));
+        model.addAttribute("roles", roleServiceImpl.getRoleList());
+  */
         userService.addUser(user);
         return "redirect:/admin/allUsers";
     }

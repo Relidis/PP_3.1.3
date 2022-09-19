@@ -55,12 +55,15 @@
                        th:id="password">
             </label>
             <br/>
-            <label>
-                <input type="checkbox"
-                       name="roleAdmin"
-                       th:value="ROLE_ADMIN"
-                       th:text="Администратор">
-            </label>
+            <br>
+                    <label>Роль:
+                        <select size="2" multiple name="role" required="required">
+                            <option selected="selected" value="1">USER</option>
+                            <option value="2">ADMIN</option>
+                        </select>
+                    </label>
+
+
 
         </p>
     </fieldset>

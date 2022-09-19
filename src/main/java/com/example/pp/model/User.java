@@ -39,7 +39,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

@@ -17,11 +17,9 @@ import java.util.Set;
 
 @SpringBootApplication
 public class Application implements ApplicationRunner {
-    public Application(UserService userService) {
-        this.userService = userService;
-    }
 
-    private UserService userService;
+
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

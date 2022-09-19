@@ -30,14 +30,14 @@ public class RegistrationController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/registration")
+    @GetMapping("registration")
     public String registration(Model model) {
         model.addAttribute("user", new User());
 
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("registration")
     public String addUser(@ModelAttribute("user") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
