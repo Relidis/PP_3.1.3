@@ -38,25 +38,38 @@ public class AdminController {
 
         return "allUsers";
     }
-
     @GetMapping(value = "add")
     public String addUser(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
+        model.addAttribute("user", new User());
         return "add";
     }
     @PostMapping(value = "add")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String postAddUser(@ModelAttribute("user") User user,
+                              @RequestParam(required=false) String roleAdmin) {
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.getRoleById(2L));
+        if (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN")) {
+            roles.add(roleService.getRoleById(1L));
+        }
+        user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
- /*       Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleByName("ROLE_USER"));
-        roles.add(roleService.getRoleByName("ROLE_ADMIN"));
-        model.addAttribute("roles", roleServiceImpl.getRoleList());
-  */
+        userService.addUser(user);
+
+        return "redirect:/admin/AllUsers";
+    }
+    /*
+    @PostMapping(value = "add")
+    public String createUser(@ModelAttribute("user") Model model) {
+        User user = new User();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        List<Role> roles = roleService.getAllRoles();
+
         userService.addUser(user);
         return "redirect:/admin/allUsers";
     }
 
+
+     */
 
 
     @GetMapping (value = "/edit/{id}")

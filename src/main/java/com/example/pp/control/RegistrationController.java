@@ -41,7 +41,7 @@ public class RegistrationController {
     public String addUser(@ModelAttribute("user") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleByName("ROLE_USER"));
+        roles.add(roleService.getRoleById(2L));
         user.setRoles(roles);
         userService.addUser(user);
         return "redirect:/";

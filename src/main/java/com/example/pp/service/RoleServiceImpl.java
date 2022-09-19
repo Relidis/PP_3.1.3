@@ -1,6 +1,7 @@
 package com.example.pp.service;
 
 import com.example.pp.model.Role;
+import com.example.pp.model.User;
 import com.example.pp.repository.RoleRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.addRole(role);
     }
 
+    public List<Role> getAllRoles() {
+        return roleRepository.getAllRoles();
+    }
 
     @Transactional(readOnly=true)
     @Override

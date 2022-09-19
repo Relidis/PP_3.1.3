@@ -56,12 +56,12 @@
             </label>
             <br/>
             <br>
-                    <label>Роль:
-                        <select size="2" multiple name="role" required="required">
-                            <option selected="selected" value="1">USER</option>
-                            <option value="2">ADMIN</option>
-                        </select>
-                    </label>
+            <label>
+                <input type="checkbox"
+                       name="roleAdmin"
+                       th:value="ROLE_ADMIN"
+                       th:text="Администратор">
+            </label>
 
 
 
@@ -73,5 +73,7 @@
 <form th:action="@{/admin/allUsers}">
     <button type="submit">Назад к списку пользователей</button>
 </form>
+<br/>
+<button class="buttonLogout" onclick="window.location.href = '/logout';">Выйти</button>
 </body>
 </html>

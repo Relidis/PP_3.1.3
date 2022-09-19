@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-  <form th:method="POST" th:action="@{/}" th:object="${user}">
+  <form th:method="POST" th:action="@{registration}" th:object="${user}">
     <h2>Регистрация</h2>
       <fieldset>
     <div>
@@ -21,8 +21,10 @@
       </fieldset>
     <button type="submit">Зарегистрироваться</button>
   </form:form>
-  <a href="/">Главная</a>
+    <button><a href="/">Главная</a></button>
 </div>
+<br/>
+<button class="buttonLogout" onclick="window.location.href = '/logout';">Выйти</button>
 </body>
 </html>
 
