@@ -33,10 +33,10 @@ public class AdminController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("allUsers")
+    @GetMapping("/allUsers")
     public String allUsers(@AuthenticationPrincipal User user, Model model){
         List<User> users = userService.getAllUsers();
-        model.addAttribute("user", users);
+        model.addAttribute("users", users);
         model.addAttribute("user", user);
         model.addAttribute("roles", roleService.getAllRoles());
 
@@ -59,7 +59,7 @@ public class AdminController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addUser(user);
 
-        return "redirect:/admin/AllUsers";
+        return "redirect:/admin/allUsers";
     }
 
 
