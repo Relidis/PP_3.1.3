@@ -42,11 +42,7 @@ public class AdminController {
 
         return "allUsers";
     }
-    @GetMapping(value = "create")
-    public String addUser(Model model) {
-        model.addAttribute("user", new User());
-        return "add";
-    }
+
     @PostMapping(value = "add")
     public String createUser(@ModelAttribute("user") User user,
                               @RequestParam(required=false) String roleAdmin) {
@@ -63,20 +59,18 @@ public class AdminController {
     }
 
 
-    @GetMapping (value = "/edit/{id}")
-    public String editUser(Model model, @PathVariable("id") Long id) {
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "edit";
-    }
-    @PatchMapping (value = "/edit/{id}")
-    public String userUpdate(@ModelAttribute("user") User user) {
+
+    @PostMapping("/edit/{id}")
+    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "role") String role) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(role == "ROLE_USER") {
+            user.setRoles((Set<Role>) roleService.getRoleById(2L));
+        } if(role == "ROLE_ADMIN") {
+            user.setRoles((Set<Role>) roleService.getRoleById(1L));
+        }
         userService.editUser(user);
         return "redirect:/admin/allUsers";
     }
-
-
 
     @DeleteMapping ("{id}")
     public String delete(@PathVariable("id") Long id){

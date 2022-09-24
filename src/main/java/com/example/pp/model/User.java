@@ -18,6 +18,9 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private int age;
+    private String email;
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",
@@ -29,6 +32,28 @@ public class User implements UserDetails {
 
     public User(){
 
+    }
+    public String getRolesString() {
+        StringBuilder str = new StringBuilder();
+        for (Role role : roles) {
+            str.append(role + " ");
+        }
+        return str.toString();
+    }
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Role> getRoles() {
@@ -90,9 +115,11 @@ public class User implements UserDetails {
     }
 
 
-    public User(String username, String password, Set<Role> roles) {
+    public User(String username, String password, int age, String email, Set<Role> roles) {
         this.username = username;
         this.password = password;
+        this.age = age;
+        this.email = email;
         this.roles = roles;
     }
 

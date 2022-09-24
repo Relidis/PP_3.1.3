@@ -41,11 +41,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
             Set<Role> userRole = new HashSet<>();
             adminRole.add(admin);
             userRole.add(user);
-            userService.addUser(new User( "Misha", passwordEncoder.encode("admin"), adminRole ));
-            userService.addUser(new User( "Dima", passwordEncoder.encode("user"), userRole ));
-            userService.addUser(new User("Kostya", passwordEncoder.encode("dimab"),  userRole));
-            userService.addUser(new User("vasyap", passwordEncoder.encode("vasyap"), userRole));
-            userService.addUser(new User("vasyap", passwordEncoder.encode("kostyag"), userRole));
+            userService.addUser(new User( "Misha", passwordEncoder.encode("admin"),23,"Misha@google.ru", adminRole ));
+            userService.addUser(new User( "Dima", passwordEncoder.encode("user"),17,"dima@google.ru", userRole ));
+            userService.addUser(new User("Kostya", passwordEncoder.encode("123"),30,"DOG@google.ru",  userRole));
+            userService.addUser(new User("vasyap", passwordEncoder.encode("vasyap"),29,"1234@google.ru", userRole));
+            userService.addUser(new User("vasyap", passwordEncoder.encode("kostyag"),43,"droptable@google.ru", userRole));
 
         }
     }

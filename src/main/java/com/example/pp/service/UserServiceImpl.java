@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public void addUser(User user) {
         userRepository.addUser(user);
@@ -46,17 +45,20 @@ public class UserServiceImpl implements UserService {
     public void editUser(User user) {
         userRepository.editUser(user);
     }
-    @Transactional(readOnly=true)
+
+    @Transactional(readOnly = true)
     @Override
     public User getUserById(Long id) {
         return userRepository.getUserById(id);
     }
-    @Transactional(readOnly=true)
+
+    @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
-    @Transactional(readOnly=true)
+
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.getUserByUsername(username);

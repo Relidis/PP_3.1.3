@@ -27,4 +27,5 @@ public class UserController {
         modelMap.addAttribute("user", userService.loadUserByUsername(principal.getName()));
         return "oneUser";
     }
+
 }
